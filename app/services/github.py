@@ -32,26 +32,26 @@ class GitHub():
 
     def get(self, route_url, params = {}):
         url = api_url + route_url
-        params['access_token'] = self.access_token
+        headers = {'Authorization': 'token %s' % self.access_token}
 
-        return requests.get(url, params=params).json()
+        return requests.get(url, headers=headers, params=params).json()
 
     def post(self, route_url, params = {}):
         url = api_url + route_url
-        params['access_token']  = self.access_token
+        headers = {'Authorization': 'token %s' % self.access_token}
 
-        return requests.post(url, params=params).json()
+        return requests.post(url, headers=headers, params=params).json()
 
     def delete(self, route_url, params = {}):
         url = api_url + route_url
-        params['access_token']  = self.access_token
+        headers = {'Authorization': 'token %s' % self.access_token}
 
-        return requests.delete(url, params=params)
+        return requests.delete(url, headers=headers, params=params)
 
     @staticmethod
     def get_user_from_token(access_token):
         """Fetch user data using the access token."""
         url = api_url + '/user'
-        params = { 'access_token': access_token }
+        headers = {'Authorization': 'token %s' % access_token}
 
-        return requests.get(url, params=params).json()
+        return requests.get(url, headers=headers).json()
